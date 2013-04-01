@@ -3,7 +3,8 @@ using Microsoft.AspNet.SignalR.Client.Hubs;
 
 namespace SignalRDemos.Messages.Server
 {
-     // TODO: add blog post url and github signalr geting started hubs url
+    // http://www.ryantomlinson.com/post/Building-a-real-time-exception-monitor-with-NServiceBus-and-SignalR.aspx
+    // https://github.com/SignalR/SignalR/wiki/SignalR-Client-Hubs
     public static class SignalRProxyConnection
     {
         private static bool _connected;
