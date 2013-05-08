@@ -11,7 +11,6 @@ namespace SignalRDemos.Web.Controllers
 
         public ActionResult Index()
         {
-
             return View();
         }
 
