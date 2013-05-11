@@ -23,7 +23,7 @@ namespace SignalRDemos.Web
                                .Log4Net()
                                .PurgeOnStartup(true)
                                .UnicastBus()
-                               .ImpersonateSender(false)
+                               .RunHandlersUnderIncomingPrincipal(false)
                                .CreateBus()
                                .Start(
                                    () =>
