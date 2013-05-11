@@ -1,4 +1,5 @@
-﻿using System.Web.Routing;
+﻿using System.Configuration;
+using System.Web.Routing;
 using NServiceBus;
 using SignalRDemos.Web.Injection;
 
@@ -19,7 +20,7 @@ namespace SignalRDemos.Web
                                .DefaultBuilder()
 /* as of 3-18-2013 - always configure SignalR before MVC but not sure about Web API so I'm putting SignalR before everything (see bottom of https://github.com/SignalR/SignalR/wiki/Extensibility) */.ForSignalR().ForMvc().ForWebApi(System.Web.Http.GlobalConfiguration.Configuration)
                                .XmlSerializer()
-                               .UseTransport<NServiceBus.RabbitMQ>()
+                               .UseTransport<NServiceBus.RabbitMQ>(() => ConfigurationManager.AppSettings["CLOUDAMQP_URL"] ?? "host=localhost")
                                .Log4Net()
                                .PurgeOnStartup(true)
                                .UnicastBus()
