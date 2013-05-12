@@ -1,6 +1,6 @@
-﻿using System.Configuration;
-using System.Web.Routing;
+﻿using System.Web.Routing;
 using NServiceBus;
+using SignalRDemos.Common.Libs.NServiceBus;
 using SignalRDemos.Web.Injection;
 
 namespace SignalRDemos.Web
@@ -14,13 +14,12 @@ namespace SignalRDemos.Web
             // https://github.com/SignalR/SignalR/issues/724
             // http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager.defaultconnectionlimit.aspx
             System.Net.ServicePointManager.DefaultConnectionLimit = 10;
-
             // NServiceBus configuration
             var bus = NServiceBus.Configure.With()
                                .DefaultBuilder()
 /* as of 3-18-2013 - always configure SignalR before MVC but not sure about Web API so I'm putting SignalR before everything (see bottom of https://github.com/SignalR/SignalR/wiki/Extensibility) */.ForSignalR().ForMvc().ForWebApi(System.Web.Http.GlobalConfiguration.Configuration)
                                .XmlSerializer()
-                               .UseTransport<NServiceBus.RabbitMQ>(() => ConfigurationManager.AppSettings["CLOUDAMQP_URL"] ?? "host=localhost")
+                               .UseTransport<NServiceBus.RabbitMQ>(CloudMQUtils.UseAppHarborAppSetting)
                                .Log4Net()
                                .PurgeOnStartup(true)
                                .UnicastBus()

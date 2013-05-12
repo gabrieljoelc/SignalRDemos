@@ -106,7 +106,6 @@
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Net.Http">
@@ -190,6 +189,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SignalRDemos.Common.Libs.NServiceBus\SignalRDemos.Common.Libs.NServiceBus.csproj">
+      <Project>{2CE0AA9B-6F0A-4643-8D5F-60BEF85C2BE6}</Project>
+      <Name>SignalRDemos.Common.Libs.NServiceBus</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SignalrDemos.Messages\SignalRDemos.Messages.csproj">
       <Project>{D256B74E-72FB-44E8-89D7-610D90A6C3CD}</Project>
       <Name>SignalRDemos.Messages</Name>

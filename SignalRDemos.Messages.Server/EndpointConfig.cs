@@ -1,5 +1,5 @@
 using System;
-using System.Configuration;
+using SignalRDemos.Common.Libs.NServiceBus;
 
 namespace SignalRDemos.Messages.Server 
 {
@@ -13,8 +13,7 @@ namespace SignalRDemos.Messages.Server
 	{
         public void Init()
         {
-            Configure.With()
-                     .UseTransport<RabbitMQ>(() => ConfigurationManager.AppSettings["CLOUDAMQP_URL"] ?? "host=localhost");
+            Configure.With().UseTransport<RabbitMQ>(CloudMQUtils.UseAppHarborAppSetting);
         }
 	}
 
