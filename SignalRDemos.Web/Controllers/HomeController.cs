@@ -13,6 +13,5 @@ namespace SignalRDemos.Web.Controllers
         {
             return View();
         }
-
     }
 }

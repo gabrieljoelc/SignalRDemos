@@ -1,5 +1,4 @@
-﻿using System;
-using NServiceBus;
+﻿using NServiceBus;
 
 namespace SignalRDemos.Messages
 {
@@ -7,5 +6,9 @@ namespace SignalRDemos.Messages
     {
         public string Message { get; set; }
         public string ConnectionId { get; set; }
+        public override string ToString()
+        {
+            return string.Format("Message: {0}, ConnectionId: {1}", Message, ConnectionId);
+        }
     }
 }

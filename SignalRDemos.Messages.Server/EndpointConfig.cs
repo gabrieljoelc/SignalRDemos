@@ -13,7 +13,7 @@ namespace SignalRDemos.Messages.Server
 	{
         public void Init()
         {
-            Configure.With().UseTransport<RabbitMQ>(CloudMQUtils.UseAppHarborAppSetting);
+            Configure.With().UseTransport<RabbitMQ>(CloudMQUtils.UseUrlFromAppSetting);
         }
 	}
 

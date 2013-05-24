@@ -27,7 +27,7 @@ namespace SignalRDemos.Common.Libs.NServiceBus
             }
         }
 
-        public static string UseAppHarborAppSetting()
+        public static string UseUrlFromAppSetting()
         {
             return ConvertUrlToTransportConnectionString(ConfigurationManager.AppSettings["CLOUDAMQP_URL"]);
         }

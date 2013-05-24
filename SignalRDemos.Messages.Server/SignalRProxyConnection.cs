@@ -6,7 +6,7 @@ namespace SignalRDemos.Messages.Server
 {
     // http://www.ryantomlinson.com/post/Building-a-real-time-exception-monitor-with-NServiceBus-and-SignalR.aspx
     // https://github.com/SignalR/SignalR/wiki/SignalR-Client-Hubs
-    public static class SignalRProxyConnection
+    internal static class SignalRProxyConnection
     {
         private static IHubProxy _proxy;
         private static HubConnection _hubConnection;
@@ -16,6 +16,7 @@ namespace SignalRDemos.Messages.Server
 
         public static async void SendMessage(SendMessageCommand message)
         {
+            Console.WriteLine("Trying to send message to hub: {0}", message);
             if (!IsConnected)
             {
                 _hubConnection = new HubConnection(ConnectionUrl);
@@ -28,19 +29,21 @@ namespace SignalRDemos.Messages.Server
                 catch (Exception ex)
                 {
                     Console.WriteLine(
-                        "An error occured when trying to connection to {0} for Hub Proxy {1} with this exception: {2}",
-                        ConnectionUrl, HubName, ex.GetBaseException());
+                        "An error occured when trying to connection to {0} for Hub Proxy {1} for message {2} with this exception: {3}",
+                        ConnectionUrl, HubName, message, ex.GetBaseException());
+                    throw;
                 }
             }
             try
             {
                 await _proxy.Invoke(HubMethodName, message.ConnectionId, message.Message);
-                Console.WriteLine("Success! Invoked SendByConnectionId()");
+                Console.WriteLine("Success! Invoked SendByConnectionId() for message {0}", message);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred trying to invoke the Hub method {0} with this exception: {1}",
-                                  HubMethodName, ex.GetBaseException());
+                Console.WriteLine("An error occurred trying to invoke the Hub method {0} for message {1} with this exception: {2}",
+                                  HubMethodName, message, ex.GetBaseException());
+                throw;
             }
         }
 
